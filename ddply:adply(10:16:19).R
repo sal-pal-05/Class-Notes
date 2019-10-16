@@ -44,7 +44,7 @@ unique(nd$depth_z)  ## should get 3 values based on the if else conditions it wa
 batch_data=list.files("batch_data/", full=TRUE, pattern="ISIIS")
 batch_data
 
-##Umbrella Function with "adply" = lines 49-69
+##Umbrella Function with "adply" = lines 49-82
 ##phy will have all the months data collapsed into a SINGLE dataframe
 phy=adply(batch_data, 1, function(file){
   
@@ -66,16 +66,19 @@ phy=adply(batch_data, 1, function(file){
   names(d)=head
   
     #create a proper date+time format
-  )
+  date=scan(batch_data[1], what="character", skip=1, nlines=1, quiet=TRUE)
   
+  d$date=date[2]
   
+  d$dateTime=str_c(d$date, d$time, sep=" ")
   
+  d$dateTime= as.POSIXct(strptime(d$dateTime,
+                                  format="%m/%d/%y %H:%M:&OS", 
+                                  tz="America/New_York"))
   
-  
-  
-  
-  
-  
+  return(d)
+
+
 }, .inform=T, .progress="text")
 
 
