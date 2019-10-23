@@ -198,6 +198,43 @@ for(i in 1:length(y)) {
 }
 
 
+##10/23/2019----
+
+patch.list=list()
+max.brks.index=nrow(brks)
+max=max(brks$no)-1
+
+for(k in brks$no[1]:max {
+  p.mid=in.patch[in.patch$r.index >=brks$r.index[k] &
+                 in.patch$r.index <brks$r.index[k+1], ]
+  
+  if(nrow(p.mid)>0){
+    p.mid$patch.id =k+1
+    patch.list[[k]] =p.mid
+  }
+}  
+
+patch.df =do.call("rbind", patch.list)    
+ 
+
+
+    
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+})
 
 
 
